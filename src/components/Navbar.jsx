@@ -1,37 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Volume2, VolumeX, Menu, X, ArrowUpRight, Clock, MapPin, Sparkles } from 'lucide-react';
-import MagneticButton from './MagneticButton';
+import { Volume2, VolumeX, Menu, X, ArrowUpRight } from 'lucide-react';
 import { sound } from '../utils/audio';
-import { AGENCY_INFO } from '../data/agencyData';
 
 export default function Navbar({ onOpenInquiry }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(sound.isMuted());
-  const [tokyoTime, setTokyoTime] = useState('');
-  const [hoveredNavImage, setHoveredNavImage] = useState(null);
 
-  // Live Tokyo clock
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const options = {
-        timeZone: 'Asia/Tokyo',
-        hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      };
-      setTokyoTime(new Intl.DateTimeFormat('en-US', options).format(now));
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -43,105 +19,35 @@ export default function Navbar({ onOpenInquiry }) {
   };
 
   const navLinks = [
-    {
-      name: 'WORK',
-      path: '/work',
-      desc: 'Selected Hospitality & Property Campaigns',
-      preview: 'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?q=80&w=600&auto=format&fit=crop',
-    },
-    {
-      name: 'SERVICES',
-      path: '/services',
-      desc: 'The 10 Core Agency Disciplines',
-      preview: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=600&auto=format&fit=crop',
-    },
-    {
-      name: 'ABOUT',
-      path: '/about',
-      desc: 'Expressive Brutalism & Studio Standards',
-      preview: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop',
-    },
-    {
-      name: 'CONTACT',
-      path: '/contact',
-      desc: 'Tokyo Studio & Global Inquiries',
-      preview: 'https://images.unsplash.com/photo-1527061011665-3652c757a4d4?q=80&w=600&auto=format&fit=crop',
-    },
+    { name: 'WORK', path: '/work' },
+    { name: 'SERVICES', path: '/services' },
+    { name: 'ABOUT', path: '/about' },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-[990] w-full bg-cream/95 backdrop-blur-md border-b border-ink/15 transition-all">
-        {/* Top Operational Status Bar */}
-        <div className="hidden md:flex items-center justify-between px-6 lg:px-12 py-1.5 bg-ink text-cream text-[11px] font-space tracking-widest uppercase border-b border-cream/10">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-vermilion animate-pulse" />
-              <span className="text-cream/90">{AGENCY_INFO.status}</span>
-            </div>
-            <div className="flex items-center gap-2 text-cream/60">
-              <MapPin className="w-3 h-3 text-vermilion" />
-              <span>{AGENCY_INFO.location}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 font-mono text-cream/90">
-              <Clock className="w-3 h-3 text-vermilion" />
-              <span>TOKYO JST: {tokyoTime || '19:42:00'}</span>
-            </div>
-
-            {/* Audio Feedback Switch */}
-            <button
-              onClick={toggleSound}
-              className="flex items-center gap-1.5 text-cream/70 hover:text-vermilion transition-colors focus:outline-none"
-              title="Toggle Audio Feedback"
-            >
-              {isMuted ? (
-                <>
-                  <VolumeX className="w-3.5 h-3.5 text-cream/40" />
-                  <span className="text-[10px]">SOUND: OFF</span>
-                </>
-              ) : (
-                <>
-                  <Volume2 className="w-3.5 h-3.5 text-vermilion animate-pulse" />
-                  <span className="text-[10px] text-vermilion font-bold">SOUND: ON</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Main Navbar */}
-        <div className="flex items-center justify-between px-6 lg:px-12 py-4">
-          {/* Brand Wordmark & Stamp */}
+      <header className="sticky top-0 z-[990] w-full bg-cream/95 backdrop-blur-md border-b border-ink/20 transition-all select-none">
+        <div className="flex items-center justify-between px-6 lg:px-12 py-3.5">
+          {/* Left Brand Wordmark: AKARI brush + STUDIOS° */}
           <Link
             to="/"
             onClick={() => sound.click()}
-            className="flex items-center gap-3.5 group select-none"
+            className="flex items-center gap-2 group shrink-0"
           >
-            {/* Vermilion Inkan Stamp */}
-            <div className="w-9 h-9 md:w-10 md:h-10 border-2 border-vermilion bg-vermilion/5 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-105">
-              <span className="font-serif text-xl md:text-2xl font-black text-vermilion leading-none">
-                朱
-              </span>
-              <span className="absolute -top-0.5 -right-0.5 w-1 h-1 bg-vermilion" />
-              <span className="absolute -bottom-0.5 -left-0.5 w-1 h-1 bg-vermilion" />
-            </div>
-
-            {/* Typography Mark */}
-            <div>
-              <div className="font-anton text-2xl md:text-3xl tracking-tight uppercase text-ink group-hover:text-vermilion transition-colors leading-none">
-                AKARI STUDIOS
-              </div>
-              <div className="font-space text-[9px] md:text-[10px] font-bold tracking-widest text-ink/60 uppercase">
-                CREATIVE × DIGITAL × GROWTH
-              </div>
-            </div>
+            {/* Expressive Vermilion Brush Script AKARI */}
+            <span className="font-serif italic text-2xl sm:text-3xl font-black text-vermilion tracking-tight group-hover:scale-105 transition-transform duration-300">
+              AKARI
+            </span>
+            <span className="font-space text-xs sm:text-sm font-bold tracking-[0.25em] text-ink uppercase ml-0.5">
+              S T U D I O S °
+            </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 font-space text-xs tracking-widest font-bold uppercase">
+          {/* Thin Editorial Hairline Guide extending across */}
+          <div className="flex-1 h-[1px] bg-ink/20 mx-6 hidden xl:block pointer-events-none" />
+
+          {/* Desktop Navigation Pill Buttons */}
+          <nav className="hidden lg:flex items-center gap-3">
             {navLinks.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -150,57 +56,77 @@ export default function Navbar({ onOpenInquiry }) {
                   to={item.path}
                   onMouseEnter={() => sound.hover()}
                   onClick={() => sound.click()}
-                  className={`relative py-1 transition-colors ${
-                    isActive ? 'text-vermilion' : 'text-ink hover:text-vermilion'
+                  className={`rounded-full border px-5 py-1.5 font-space text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                    isActive
+                      ? 'border-ink bg-ink text-cream'
+                      : 'border-ink/80 text-ink hover:bg-ink hover:text-cream'
                   }`}
                 >
                   {item.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-vermilion" />
-                  )}
                 </Link>
               );
             })}
-          </nav>
 
-          {/* CTA & Mobile Menu Toggle */}
-          <div className="flex items-center gap-4">
-            <MagneticButton
+            {/* Solid Vermilion CTA Pill Button */}
+            <button
               onClick={() => {
                 sound.click();
                 onOpenInquiry();
               }}
-              variant="primary"
-              size="sm"
-              className="hidden sm:inline-flex"
-              icon={<ArrowUpRight className="w-3.5 h-3.5" />}
+              className="ml-1 rounded-full bg-vermilion text-cream px-6 py-2 font-space text-xs font-bold uppercase tracking-wider shadow-sm hover:bg-ink hover:text-cream transition-all duration-300 flex items-center gap-1.5 group"
             >
-              START A PROJECT
-            </MagneticButton>
+              <span>START A PROJECT</span>
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
 
-            {/* Mobile / Fullscreen Menu Toggle */}
+            {/* Subtle Audio Switch */}
+            <button
+              onClick={toggleSound}
+              className="ml-2 w-8 h-8 rounded-full border border-ink/30 flex items-center justify-center text-ink/70 hover:border-vermilion hover:text-vermilion transition-colors"
+              title="Toggle Audio Feedback"
+            >
+              {isMuted ? (
+                <VolumeX className="w-3.5 h-3.5 opacity-50" />
+              ) : (
+                <Volume2 className="w-3.5 h-3.5 text-vermilion" />
+              )}
+            </button>
+          </nav>
+
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center gap-3 lg:hidden">
+            <button
+              onClick={() => {
+                sound.click();
+                onOpenInquiry();
+              }}
+              className="rounded-full bg-vermilion text-cream px-4 py-1.5 font-space text-xs font-bold uppercase tracking-wider"
+            >
+              PROJECT ↗
+            </button>
+
             <button
               onClick={() => {
                 sound.click();
                 setIsMenuOpen(!isMenuOpen);
               }}
-              className="w-10 h-10 border-2 border-ink flex items-center justify-center hover:bg-vermilion hover:border-vermilion hover:text-cream transition-colors lg:hidden"
+              className="w-9 h-9 border border-ink rounded-full flex items-center justify-center text-ink hover:bg-vermilion hover:border-vermilion hover:text-cream transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Fullscreen Brutalist Menu Overlay (Mobile & Tablet) */}
+      {/* Fullscreen Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-[73px] md:top-[103px] z-[980] bg-ink text-cream flex flex-col justify-between p-6 md:p-12 overflow-y-auto lg:hidden">
-          <div className="space-y-4">
+        <div className="fixed inset-0 top-[61px] z-[980] bg-ink text-cream flex flex-col justify-between p-6 sm:p-10 overflow-y-auto lg:hidden">
+          <div className="space-y-6 pt-4">
             <div className="font-space text-xs text-cream/40 tracking-widest uppercase pb-2 border-b border-cream/20">
-              NAVIGATION DIRECTORY // 案内
+              NAVIGATION // 案内
             </div>
-            <div className="flex flex-col gap-4 pt-4">
+            <div className="flex flex-col gap-4">
               {navLinks.map((link, idx) => (
                 <Link
                   key={link.name}
@@ -209,45 +135,31 @@ export default function Navbar({ onOpenInquiry }) {
                     sound.click();
                     setIsMenuOpen(false);
                   }}
-                  className="group flex items-baseline justify-between py-2 border-b border-cream/15 hover:border-vermilion transition-colors"
+                  className="group flex items-baseline justify-between py-3 border-b border-cream/15 hover:border-vermilion transition-colors"
                 >
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-xs text-vermilion">0{idx + 1}</span>
-                    <span className="font-anton text-4xl sm:text-5xl uppercase tracking-wide group-hover:text-vermilion transition-colors">
+                    <span className="font-anton text-4xl uppercase tracking-wide group-hover:text-vermilion transition-colors">
                       {link.name}
                     </span>
                   </div>
-                  <ArrowUpRight className="w-6 h-6 text-cream/40 group-hover:text-vermilion group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  <ArrowUpRight className="w-5 h-5 text-cream/40 group-hover:text-vermilion transition-transform" />
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Bottom Actions */}
-          <div className="pt-8 space-y-6">
-            <MagneticButton
+          <div className="pt-8 space-y-4">
+            <button
               onClick={() => {
                 sound.click();
                 setIsMenuOpen(false);
                 onOpenInquiry();
               }}
-              variant="primary"
-              size="lg"
-              className="w-full"
-              icon={<Sparkles className="w-4 h-4" />}
+              className="w-full rounded-full bg-vermilion text-cream py-3.5 font-space text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cream hover:text-ink transition-colors"
             >
-              START A PROJECT BRIEF
-            </MagneticButton>
-
-            <div className="flex justify-between items-center text-xs font-space text-cream/60 uppercase">
-              <span>TOKYO // {tokyoTime}</span>
-              <button
-                onClick={toggleSound}
-                className="text-vermilion font-bold"
-              >
-                SOUND: {isMuted ? 'OFF' : 'ON'}
-              </button>
-            </div>
+              <span>START A PROJECT ↗</span>
+            </button>
           </div>
         </div>
       )}

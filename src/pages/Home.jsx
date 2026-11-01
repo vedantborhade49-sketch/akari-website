@@ -7,125 +7,15 @@ import GrowthSimulator from '../components/GrowthSimulator';
 import { AGENCY_INFO, CASE_STUDIES, SERVICES, INDUSTRIES, THE_METHOD, TESTIMONIALS } from '../data/agencyData';
 import { sound } from '../utils/audio';
 
+import Hero from '../components/Hero';
+
 export default function Home({ onOpenInquiry, onSelectCaseStudy }) {
   const [activeServiceHover, setActiveServiceHover] = useState(0);
 
   return (
     <div className="w-full overflow-hidden bg-cream text-ink bg-grain">
-      {/* 01. HERO SECTION */}
-      <section className="relative min-h-[92vh] flex flex-col justify-between pt-6 md:pt-12 pb-12 px-6 lg:px-12 border-b-2 border-ink">
-        {/* Top Meta Details */}
-        <div className="flex flex-wrap items-center justify-between gap-4 font-space text-xs tracking-widest uppercase border-b border-ink/15 pb-4 mb-6">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 bg-vermilion inline-block" />
-            <span className="font-bold text-ink">AKARI STUDIOS // 東京</span>
-            <span className="text-ink/50 hidden sm:inline">[INDEPENDENT CREATIVE & GROWTH]</span>
-          </div>
-          <div className="flex items-center gap-4 text-ink/70">
-            <span>[EST. 2024]</span>
-            <span className="text-vermilion font-bold">STATUS: OPERATIONAL</span>
-          </div>
-        </div>
-
-        {/* Main Hero Typography & Editorial Collage */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
-          {/* Left Column: Bold Condensed Typography */}
-          <div className="lg:col-span-8 z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-vermilion text-cream font-space text-[11px] font-bold tracking-widest uppercase mb-4">
-              <Flame className="w-3.5 h-3.5" />
-              <span>CREATIVE × DIGITAL × GROWTH</span>
-            </div>
-
-            <h1 className="headline-hero text-ink uppercase mb-6 tracking-tighter">
-              TURNING <span className="text-vermilion">VISION</span> INTO DIGITAL REALITY.
-            </h1>
-
-            <p className="font-sans text-base md:text-xl text-ink/80 max-w-2xl leading-relaxed mb-8">
-              We engineer expressive brutalist websites, viral culinary cinema, and high-velocity digital acquisition funnels for Michelin-level dining groups, luxury property developments, and visionary founders.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <MagneticButton
-                onClick={() => onOpenInquiry()}
-                variant="primary"
-                size="lg"
-                icon={<ArrowUpRight className="w-4 h-4" />}
-              >
-                START A PROJECT BRIEF
-              </MagneticButton>
-
-              <MagneticButton
-                href="#featured-work"
-                variant="outline"
-                size="lg"
-              >
-                EXPLORE WORK [06]
-              </MagneticButton>
-            </div>
-          </div>
-
-          {/* Right Column: Editorial Hero Collage Card */}
-          <div className="lg:col-span-4 relative">
-            <div className="relative border-2 border-ink bg-cream-light p-3 shadow-xl">
-              <div className="overflow-hidden border border-ink relative group">
-                <img
-                  src="https://images.unsplash.com/photo-1579027989536-b7b1f875659b?q=80&w=1000&auto=format&fit=crop"
-                  alt="Maison Kuro Ginza Omakase by Akari Studios"
-                  className="w-full h-80 sm:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-ink text-cream font-space text-[10px] tracking-widest px-2.5 py-1 uppercase">
-                  CASE ARCHIVE // 01
-                </div>
-                <div className="absolute bottom-3 right-3 bg-vermilion text-cream font-anton text-lg tracking-wider px-3 py-1 uppercase">
-                  +380% DIRECT BOOKINGS
-                </div>
-              </div>
-
-              {/* Sub-label */}
-              <div className="pt-3 flex justify-between items-center font-space text-xs tracking-wider uppercase">
-                <span className="font-bold text-ink">MAISON KURO OMACASE</span>
-                <span className="text-vermilion font-mono">GINZA, TOKYO</span>
-              </div>
-            </div>
-
-            {/* Japanese Accent Stamp floating offset */}
-            <div className="hidden sm:flex absolute -bottom-6 -left-6 w-20 h-20 border-4 border-vermilion bg-cream items-center justify-center shadow-lg pointer-events-none">
-              <span className="font-serif text-4xl font-black text-vermilion">朱</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Bottom Bar: Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-ink/20 font-space text-xs uppercase tracking-wider">
-          {AGENCY_INFO.stats.map((stat, idx) => (
-            <div key={idx} className="p-3 border-r last:border-r-0 border-ink/15">
-              <div className="font-anton text-2xl sm:text-3xl md:text-4xl text-vermilion tracking-tight mb-1">
-                {stat.value}
-              </div>
-              <div className="font-bold text-ink text-[11px] mb-0.5">
-                {stat.label}
-              </div>
-              <div className="font-sans text-[11px] text-ink/60 lowercase">
-                {stat.detail}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 02. KINETIC MARQUEE TICKER */}
-      <Marquee
-        items={[
-          "EXPRESSIVE BRUTALISM",
-          "RESTAURANT REVENUE ACCELERATION",
-          "LUXURY REAL ESTATE SELL-OUTS",
-          "COMMISSION-FREE DIRECT RESERVATIONS",
-          "HIGH-PERFORMANCE REACT & VITE",
-          "META & GOOGLE ADS DOMINANCE"
-        ]}
-        speed="24s"
-      />
+      {/* 01. ELEVATED EXPERIMENTAL BRUTALIST HERO SECTION */}
+      <Hero onOpenInquiry={onOpenInquiry} />
 
       {/* 03. THE ANTI-GENERIC MANIFESTO */}
       <section className="py-20 md:py-32 px-6 lg:px-12 bg-ink text-cream border-b-2 border-ink relative overflow-hidden">
