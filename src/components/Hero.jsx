@@ -116,13 +116,18 @@ export default function Hero({ onOpenInquiry }) {
 
       {/* TOP STUDIO IDENTIFICATION BAR */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 font-space text-[11px] md:text-xs tracking-widest uppercase pb-4 mb-4 md:mb-6 border-b border-ink/30 pl-0 md:pl-8">
-        <div className="flex items-center gap-4 sm:gap-6 text-cream">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-ink inline-block" />
-            <span className="font-bold tracking-widest text-ink">AKARI STUDIOS</span>
-            <span className="text-cream font-serif font-black text-sm">朱</span>
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-cream px-2.5 py-1 border-2 border-ink shadow-[3px_3px_0px_#211B18] flex items-center">
+              <img
+                src="/logo1.png"
+                alt="Akari Studios Official Logo"
+                className="h-6 sm:h-7 w-auto object-contain"
+              />
+            </div>
+            <span className="text-cream font-serif font-black text-base drop-shadow-sm">朱</span>
           </div>
-          <div className="hidden sm:flex items-center gap-2 text-cream/80">
+          <div className="hidden sm:flex items-center gap-2 text-cream font-medium">
             <MapPin className="w-3.5 h-3.5 text-ink" />
             <span>GINZA, TOKYO // 35.6762° N, 139.6503° E</span>
           </div>
