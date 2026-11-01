@@ -1,43 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight, ArrowDown, Sparkles, MapPin, Layers, Flame } from 'lucide-react';
+import MagneticButton from './MagneticButton';
 import { sound } from '../utils/audio';
-import { SeigaihaPattern, BrushStroke, DotMatrix, VerticalJapaneseGuide } from './BrutalistGraphics';
+import { SeigaihaPattern, BrushStroke, DotMatrix, Crosshairs, VerticalJapaneseGuide } from './BrutalistGraphics';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero({ onOpenInquiry }) {
-  const [palette, setPalette] = useState('vermilion'); // 'vermilion' (per Section 01 spec) or 'cream' (per reference)
-  
   const containerRef = useRef(null);
   const headlineRef = useRef(null);
   const visualRef = useRef(null);
-  const middleCopyRef = useRef(null);
+  const copyBlockRef = useRef(null);
+  const ctaGroupRef = useRef(null);
   const brushRef = useRef(null);
-  const bottomGridRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
-        gsap.set(['.hero-line-reveal', visualRef.current, middleCopyRef.current, bottomGridRef.current], {
+        gsap.set(['.hero-line-reveal', visualRef.current, copyBlockRef.current, ctaGroupRef.current], {
           opacity: 1,
           y: 0,
         });
         return;
       }
 
-      // Filmic Entrance Animation
       const tl = gsap.timeline({
         delay: 0.1,
         defaults: { ease: 'power4.out' },
       });
 
-      // Headline entrance
+      // Headline entrance: clipped reveal
       tl.fromTo(
         '.hero-line-reveal',
-        { y: '110%', opacity: 0 },
+        { y: '115%', opacity: 0 },
         { y: '0%', opacity: 1, duration: 1.1, stagger: 0.12 },
         0.1
       );
@@ -58,11 +57,11 @@ export default function Hero({ onOpenInquiry }) {
         0.7
       );
 
-      // Middle supporting copy reveal
+      // Supporting copy
       tl.fromTo(
-        middleCopyRef.current,
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.8 },
+        copyBlockRef.current,
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.8 },
         0.5
       );
 
@@ -74,18 +73,18 @@ export default function Hero({ onOpenInquiry }) {
         0.3
       );
 
-      // Bottom category strip
+      // CTAs
       tl.fromTo(
-        bottomGridRef.current,
+        ctaGroupRef.current,
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        0.8
+        { opacity: 1, y: 0, duration: 0.7 },
+        0.7
       );
 
-      // Scroll parallax interaction
+      // Scroll Parallax
       if (containerRef.current) {
         gsap.to(visualRef.current, {
-          y: -50,
+          y: -60,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -100,181 +99,146 @@ export default function Hero({ onOpenInquiry }) {
     return () => ctx.revert();
   }, []);
 
-  const serviceCategories = [
-    { title: 'BRAND & CREATIVE', path: '#service-deep-dive' },
-    { title: 'WEBSITE & TECHNOLOGY', path: '#service-deep-dive' },
-    { title: 'PERFORMANCE MARKETING', path: '#service-deep-dive' },
-    { title: 'RESTAURANT & REAL ESTATE', path: '#service-deep-dive' },
-  ];
-
-  const isVermilion = palette === 'vermilion';
-
   return (
     <section
       ref={containerRef}
-      className={`relative w-full min-h-[90vh] lg:min-h-[96vh] flex flex-col justify-between pt-6 md:pt-10 pb-0 px-6 sm:px-10 lg:px-14 border-b-2 border-ink overflow-hidden select-none transition-colors duration-500 ${
-        isVermilion
-          ? 'bg-vermilion text-ink bg-grain'
-          : 'bg-cream text-ink bg-grain'
-      }`}
+      className="relative w-full min-h-[92vh] lg:min-h-[96vh] flex flex-col justify-between pt-6 md:pt-10 pb-8 px-6 sm:px-10 lg:px-14 bg-vermilion text-ink bg-grain border-b-2 border-ink overflow-hidden select-none selection:bg-ink selection:text-cream"
     >
-      {/* Fine Halftone & Paper Texture */}
-      <div className="absolute inset-0 bg-halftone opacity-35 pointer-events-none" />
+      {/* Background Halftone & Texture */}
+      <div className="absolute inset-0 bg-halftone opacity-25 pointer-events-none" />
 
       {/* LEFT VERTICAL ANNOTATION: ア カ リ ス タ ジ オ • */}
       <VerticalJapaneseGuide
         text="ア カ リ ス タ ジ オ •"
-        color={isVermilion ? 'text-cream/90' : 'text-gold'}
-        lineColor={isVermilion ? 'bg-cream/40' : 'bg-gold/40'}
+        color="text-cream/90"
+        lineColor="bg-cream/40"
       />
 
-      {/* TOP SUBTLE PALETTE TOGGLE (Allows instant switching between Full Vermilion and Warm Cream) */}
-      <div className="absolute top-3 right-6 lg:right-12 z-20 flex items-center gap-2 font-space text-[10px] uppercase font-bold">
-        <span className={isVermilion ? 'text-cream/70' : 'text-ink/60'}>CANVAS:</span>
-        <button
-          onClick={() => {
-            sound.click();
-            setPalette('vermilion');
-          }}
-          className={`px-2 py-0.5 border transition-all ${
-            isVermilion
-              ? 'bg-ink text-cream border-ink shadow-sm'
-              : 'border-ink/40 text-ink/70 hover:border-ink'
-          }`}
-        >
-          VERMILION
-        </button>
-        <button
-          onClick={() => {
-            sound.click();
-            setPalette('cream');
-          }}
-          className={`px-2 py-0.5 border transition-all ${
-            !isVermilion
-              ? 'bg-ink text-cream border-ink shadow-sm'
-              : 'border-cream/50 text-cream hover:bg-cream hover:text-ink'
-          }`}
-        >
-          CREAM
-        </button>
-      </div>
-
-      {/* MAIN ASYMMETRIC GRID: Headline, Middle Copy, and Right Collage */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto pt-2 pb-6 pl-0 md:pl-8">
-        
-        {/* LEFT COLUMN: DOMINANT TYPOGRAPHIC COMPOSITION (Cols 1-7) */}
-        <div ref={headlineRef} className="lg:col-span-7 xl:col-span-7 space-y-1">
-          
-          {/* LINE 1: "WE MAKE" */}
-          <div className="overflow-hidden">
-            <h1 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
-              WE MAKE
-            </h1>
+      {/* TOP STUDIO IDENTIFICATION BAR */}
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 font-space text-[11px] md:text-xs tracking-widest uppercase pb-4 mb-4 md:mb-6 border-b border-ink/30 pl-0 md:pl-8">
+        <div className="flex items-center gap-4 sm:gap-6 text-cream">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-ink inline-block" />
+            <span className="font-bold tracking-widest text-ink">AKARI STUDIOS</span>
+            <span className="text-cream font-serif font-black text-sm">朱</span>
           </div>
-
-          {/* LINE 2: "BRANDS" (Canted / Slanted Brutalist Box) */}
-          <div className="pt-1 pb-2 overflow-visible">
-            <div
-              className={`hero-brands-box inline-block -rotate-2 transform origin-left px-4 sm:px-7 py-0.5 sm:py-1.5 transition-transform duration-300 hover:rotate-0 ${
-                isVermilion
-                  ? 'bg-ink text-cream border-2 sm:border-4 border-cream shadow-[8px_8px_0px_#F4EBDD]'
-                  : 'bg-vermilion text-cream border-2 sm:border-4 border-vermilion shadow-[8px_8px_0px_#211B18]'
-              }`}
-            >
-              <span
-                className={`font-anton italic text-[clamp(4rem,11.2vw,10.5rem)] leading-[0.84] tracking-tight uppercase block select-none ${
-                  isVermilion ? 'text-cream' : 'text-cream'
-                }`}
-              >
-                BRANDS
-              </span>
-            </div>
-          </div>
-
-          {/* LINE 3: "IMPOSSIBLE" */}
-          <div className="overflow-hidden">
-            <h2 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
-              IMPOSSIBLE
-            </h2>
-          </div>
-
-          {/* LINE 4: "TO IGNORE." (With Expressive Brush Underline) */}
-          <div className="relative pt-1 overflow-visible">
-            <div className="overflow-hidden">
-              <h2 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
-                TO IGNORE.
-              </h2>
-            </div>
-
-            {/* Brush Stroke curved right under IGNORE. */}
-            <div
-              ref={brushRef}
-              className="absolute -bottom-4 sm:-bottom-6 left-28 sm:left-44 md:left-56 w-56 sm:w-80 md:w-96 pointer-events-none"
-            >
-              <BrushStroke
-                className="w-full h-auto drop-shadow-sm"
-                color={isVermilion ? '#F4EBDD' : '#C83E17'}
-              />
-            </div>
+          <div className="hidden sm:flex items-center gap-2 text-cream/80">
+            <MapPin className="w-3.5 h-3.5 text-ink" />
+            <span>GINZA, TOKYO // 35.6762° N, 139.6503° E</span>
           </div>
         </div>
 
-        {/* MIDDLE / RIGHT SECTION: Editorial Statement + Japanese Brutalist Visual Collage */}
-        <div className="lg:col-span-5 xl:col-span-5 relative flex flex-col justify-between h-full pt-4 lg:pt-0">
+        <div className="flex items-center gap-4 text-ink font-bold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ink text-cream font-space text-[10px] tracking-widest uppercase">
+            <Flame className="w-3.5 h-3.5 text-vermilion" />
+            <span>CREATIVE × DIGITAL × GROWTH</span>
+          </div>
+        </div>
+      </div>
+
+      {/* MAIN ASYMMETRICAL COMPOSITION */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto pt-2 pb-6 pl-0 md:pl-8">
+        
+        {/* LEFT COLUMN: DOMINANT TYPOGRAPHIC COMPOSITION (Cols 1-7) */}
+        <div ref={headlineRef} className="lg:col-span-7 xl:col-span-7 space-y-4">
           
-          {/* MIDDLE EDITORIAL STATEMENT (Positioned to the left/top of visual) */}
-          <div
-            ref={middleCopyRef}
-            className="mb-6 lg:mb-8 space-y-3 pl-2 sm:pl-4 z-20"
-          >
-            {/* Subtitle */}
-            <div
-              className={`font-anton text-lg sm:text-2xl uppercase tracking-wider ${
-                isVermilion ? 'text-cream' : 'text-gold'
-              }`}
-            >
-              CREATIVE × DIGITAL × GROWTH
+          <div className="space-y-1">
+            {/* LINE 1: "WE MAKE" */}
+            <div className="overflow-hidden">
+              <h1 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
+                WE MAKE
+              </h1>
             </div>
 
-            {/* Supporting Copy with Vertical Bar */}
-            <div
-              className={`border-l-2 sm:border-l-4 pl-3.5 py-0.5 ${
-                isVermilion ? 'border-cream' : 'border-vermilion'
-              }`}
-            >
-              <p
-                className={`font-sans text-xs sm:text-sm md:text-[15px] font-medium leading-snug max-w-sm ${
-                  isVermilion ? 'text-cream/95' : 'text-ink/85'
-                }`}
+            {/* LINE 2: "BRANDS" (Canted Ink Black Box with Cream Lettering) */}
+            <div className="pt-1 pb-2 overflow-visible">
+              <div className="hero-brands-box inline-block -rotate-2 transform origin-left bg-ink border-2 sm:border-4 border-cream px-4 sm:px-8 py-0.5 sm:py-2 shadow-[8px_8px_0px_#F4EBDD] hover:rotate-0 transition-transform duration-300">
+                <span className="font-anton italic text-[clamp(4rem,11.2vw,10.5rem)] leading-[0.84] text-cream tracking-tight uppercase block select-none">
+                  BRANDS
+                </span>
+              </div>
+            </div>
+
+            {/* LINE 3: "IMPOSSIBLE" */}
+            <div className="overflow-hidden">
+              <h2 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
+                IMPOSSIBLE
+              </h2>
+            </div>
+
+            {/* LINE 4: "TO IGNORE." (With Cream Brush Underline) */}
+            <div className="relative pt-1 overflow-visible">
+              <div className="overflow-hidden">
+                <h2 className="hero-line-reveal font-anton text-[clamp(4.2rem,11.5vw,10.8rem)] leading-[0.84] text-ink tracking-tight uppercase">
+                  TO IGNORE.
+                </h2>
+              </div>
+
+              {/* Brush Stroke underline */}
+              <div
+                ref={brushRef}
+                className="absolute -bottom-4 sm:-bottom-6 left-28 sm:left-44 md:left-56 w-56 sm:w-80 md:w-96 pointer-events-none"
               >
-                Turning vision into digital reality through strategy, creativity, technology and performance.
+                <BrushStroke className="w-full h-auto drop-shadow-sm" color="#F4EBDD" />
+              </div>
+            </div>
+          </div>
+
+          {/* SUPPORTING DESCRIPTION BLOCK */}
+          <div
+            ref={copyBlockRef}
+            className="pt-4 max-w-xl space-y-3"
+          >
+            <div className="border-l-2 sm:border-l-4 border-ink pl-4 py-0.5">
+              <p className="font-sans text-sm md:text-base font-medium text-cream leading-relaxed">
+                We bring creativity, technology and digital strategy together to help businesses build stronger brands and grow their presence.
               </p>
             </div>
           </div>
 
-          {/* RIGHT VISUAL ARTWORK COMPOSITION: Pagoda, Red Brush Sun, Concrete Architecture, Stencil 01 */}
-          <div
-            ref={visualRef}
-            className="relative w-full max-w-lg lg:max-w-none ml-auto group"
-          >
+          {/* CALL TO ACTIONS */}
+          <div ref={ctaGroupRef} className="flex flex-wrap items-center gap-4 pt-2">
+            <MagneticButton
+              onClick={() => {
+                sound.click();
+                onOpenInquiry();
+              }}
+              variant="dark"
+              size="lg"
+              className="shadow-[4px_4px_0px_#F4EBDD] active:translate-x-1 active:translate-y-1 active:shadow-none"
+              icon={<ArrowUpRight className="w-4 h-4" />}
+            >
+              START A PROJECT
+            </MagneticButton>
+
+            <MagneticButton
+              href="#what-we-do"
+              variant="outline-cream"
+              size="lg"
+              className="shadow-[4px_4px_0px_#211B18] active:translate-x-1 active:translate-y-1 active:shadow-none"
+              icon={<ArrowDown className="w-4 h-4" />}
+            >
+              DISCOVER WHAT WE DO
+            </MagneticButton>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: ART-DIRECTED LAYERED PHOTOGRAPHIC COLLAGE (Cols 8-12) */}
+        <div ref={visualRef} className="lg:col-span-5 xl:col-span-5 relative mt-6 lg:mt-0">
+          <div className="relative mx-auto max-w-md lg:max-w-none">
+            
             {/* Halftone Dot Matrix Pattern Accents */}
             <div className="absolute -top-6 -left-8 hidden sm:block pointer-events-none z-0">
-              <DotMatrix cols={9} rows={5} dotColor={isVermilion ? 'bg-cream/40' : 'bg-gold/60'} />
+              <DotMatrix cols={9} rows={5} dotColor="bg-cream/40" />
             </div>
             <div className="absolute bottom-16 -left-6 hidden sm:block pointer-events-none z-0">
-              <DotMatrix cols={6} rows={4} dotColor={isVermilion ? 'bg-cream/40' : 'bg-gold/60'} />
+              <DotMatrix cols={6} rows={4} dotColor="bg-cream/40" />
             </div>
 
             {/* Main Visual Graphic Frame */}
-            <div
-              className={`relative border-2 sm:border-4 border-ink overflow-hidden ${
-                isVermilion
-                  ? 'bg-ink shadow-[12px_12px_0px_#211B18]'
-                  : 'bg-cream-light shadow-[12px_12px_0px_rgba(33,27,24,0.18)]'
-              }`}
-            >
+            <div className="relative border-2 sm:border-4 border-ink bg-ink overflow-hidden shadow-[12px_12px_0px_#211B18]">
               {/* Composite Graphic Image */}
-              <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden">
+              <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden group">
                 <img
                   src="/hero-art.jpg"
                   alt="Akari Studios Japanese Brutalist Architecture and Pagoda Collage"
@@ -283,90 +247,60 @@ export default function Hero({ onOpenInquiry }) {
 
                 {/* Overlaid Slanted Number 01 Stencil */}
                 <div className="absolute bottom-2 right-3 sm:bottom-4 sm:right-6 select-none pointer-events-none">
-                  <span className="font-anton italic text-7xl sm:text-9xl text-cream/95 tracking-tighter drop-shadow-[4px_4px_0px_#C83E17] leading-none">
+                  <span className="font-anton italic text-7xl sm:text-9xl text-cream/95 tracking-tighter drop-shadow-[4px_4px_0px_#211B18] leading-none">
                     01
                   </span>
                 </div>
 
-                {/* Subtle Grain & Tone Overlay */}
+                {/* Subtle Grain Overlay */}
                 <div className="absolute inset-0 bg-ink/10 mix-blend-multiply pointer-events-none" />
               </div>
 
               {/* Sub-label border bar */}
-              <div
-                className={`px-4 py-2 border-t-2 border-ink flex items-center justify-between font-space text-[10px] sm:text-xs tracking-wider uppercase ${
-                  isVermilion ? 'bg-ink text-cream' : 'bg-cream text-ink'
-                }`}
-              >
-                <span className="font-bold">ARCHITECTURAL PRESTIGE & CULINARY CINEMA</span>
-                <span className="text-vermilion font-mono font-bold">[TOKYO // GINZA]</span>
+              <div className="px-4 py-2 bg-ink text-cream border-t-2 border-ink flex items-center justify-between font-space text-[10px] sm:text-xs tracking-wider uppercase">
+                <span className="font-bold">CREATIVE × TECHNOLOGY × GROWTH</span>
+                <span className="text-vermilion font-mono font-bold">[AKARI STUDIOS]</span>
               </div>
             </div>
 
             {/* Corner Crosshair Registration Marks */}
-            <div
-              className={`absolute -top-3 -right-3 w-4 h-4 border-t-2 border-r-2 ${
-                isVermilion ? 'border-cream' : 'border-ink'
-              } pointer-events-none`}
-            />
-            <div
-              className={`absolute -bottom-3 -left-3 w-4 h-4 border-b-2 border-l-2 ${
-                isVermilion ? 'border-cream' : 'border-ink'
-              } pointer-events-none`}
-            />
+            <div className="absolute -top-3 -right-3 w-4 h-4 border-t-2 border-r-2 border-cream pointer-events-none" />
+            <div className="absolute -bottom-3 -left-3 w-4 h-4 border-b-2 border-l-2 border-cream pointer-events-none" />
           </div>
-
         </div>
 
       </div>
 
-      {/* BOTTOM SECTION: Seigaiha Waves + 4 Service Categories Grid */}
-      <div
-        className={`relative z-10 w-full pt-8 pb-6 border-t-2 mt-6 flex flex-col md:flex-row items-end md:items-center justify-between gap-6 ${
-          isVermilion ? 'border-ink/40' : 'border-ink'
-        }`}
-      >
-        
+      {/* BOTTOM SECTION: Seigaiha Waves + Core Discipline Pillars */}
+      <div className="relative z-10 w-full pt-6 pb-2 border-t-2 border-ink/40 mt-6 flex flex-col md:flex-row items-end md:items-center justify-between gap-6 pl-0 md:pl-8">
         {/* Bottom Left: Japanese Traditional Seigaiha Concentric Waves */}
         <div className="relative shrink-0 hidden sm:block w-32 h-16 overflow-hidden">
-          <SeigaihaPattern
-            className="w-full h-full -translate-y-4"
-            stroke={isVermilion ? '#F4EBDD' : '#C83E17'}
-          />
+          <SeigaihaPattern className="w-full h-full -translate-y-4" stroke="#F4EBDD" />
         </div>
 
-        {/* 4 Pillars Category Grid (BRAND & CREATIVE | WEBSITE & TECHNOLOGY | etc.) */}
-        <div
-          ref={bottomGridRef}
-          className={`w-full flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 divide-x-0 md:divide-x-2 font-space text-xs tracking-wider uppercase font-bold ${
-            isVermilion ? 'divide-ink/30' : 'divide-ink/20'
-          }`}
-        >
-          {serviceCategories.map((cat, idx) => (
+        {/* 4 Pillars Category Grid */}
+        <div className="w-full flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 divide-x-0 md:divide-x-2 divide-ink/30 font-space text-xs tracking-wider uppercase font-bold text-cream">
+          {[
+            { title: 'PERFORMANCE MARKETING', path: '#services-performance' },
+            { title: 'TECHNOLOGY SOLUTIONS', path: '#services-technology' },
+            { title: 'SOCIAL MEDIA MARKETING', path: '#services-social' },
+            { title: 'SEO & LOCAL VISIBILITY', path: '#services-seo' },
+          ].map((cat, idx) => (
             <a
               key={idx}
               href={cat.path}
               onClick={() => sound.click()}
-              className={`px-2 md:px-6 py-1 group flex flex-col justify-center transition-colors ${
-                isVermilion
-                  ? 'text-cream hover:text-ink'
-                  : 'text-ink hover:text-vermilion'
-              }`}
+              className="px-2 md:px-6 py-1 group flex flex-col justify-center hover:text-ink transition-colors"
             >
-              <div
-                className={`text-[10px] font-mono mb-0.5 ${
-                  isVermilion ? 'text-cream/60' : 'text-ink/40'
-                }`}
-              >
+              <div className="text-[10px] text-cream/60 font-mono mb-0.5">
                 0{idx + 1} //
               </div>
-              <div className="text-xs sm:text-sm font-bold leading-tight uppercase">
+              <div className="text-xs sm:text-sm font-bold leading-tight uppercase group-hover:underline">
                 {cat.title}
               </div>
             </a>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -26,25 +26,23 @@ export default function Navbar({ onOpenInquiry }) {
 
   return (
     <>
-      <header className="sticky top-0 z-[990] w-full bg-cream/95 backdrop-blur-md border-b border-ink/20 transition-all select-none">
-        <div className="flex items-center justify-between px-6 lg:px-12 py-3.5">
-          {/* Left Brand Wordmark: AKARI brush + STUDIOS° */}
+      <header className="sticky top-0 z-[990] w-full bg-cream/95 backdrop-blur-md border-b-2 border-ink/20 transition-all select-none">
+        <div className="flex items-center justify-between px-6 lg:px-12 py-2.5">
+          {/* Left Brand: Official Akari Studios Logo */}
           <Link
             to="/"
             onClick={() => sound.click()}
-            className="flex items-center gap-2 group shrink-0"
+            className="flex items-center group shrink-0"
           >
-            {/* Expressive Vermilion Brush Script AKARI */}
-            <span className="font-serif italic text-2xl sm:text-3xl font-black text-vermilion tracking-tight group-hover:scale-105 transition-transform duration-300">
-              AKARI
-            </span>
-            <span className="font-space text-xs sm:text-sm font-bold tracking-[0.25em] text-ink uppercase ml-0.5">
-              S T U D I O S °
-            </span>
+            <img
+              src="/logo1.png"
+              alt="AKARI STUDIOS"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Thin Editorial Hairline Guide extending across */}
-          <div className="flex-1 h-[1px] bg-ink/20 mx-6 hidden xl:block pointer-events-none" />
+          <div className="flex-1 h-[1px] bg-ink/20 mx-8 hidden xl:block pointer-events-none" />
 
           {/* Desktop Navigation Pill Buttons */}
           <nav className="hidden lg:flex items-center gap-3">
@@ -79,7 +77,7 @@ export default function Navbar({ onOpenInquiry }) {
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
 
-            {/* Subtle Audio Switch */}
+            {/* Tactile Audio Switch */}
             <button
               onClick={toggleSound}
               className="ml-2 w-8 h-8 rounded-full border border-ink/30 flex items-center justify-center text-ink/70 hover:border-vermilion hover:text-vermilion transition-colors"
@@ -88,7 +86,7 @@ export default function Navbar({ onOpenInquiry }) {
               {isMuted ? (
                 <VolumeX className="w-3.5 h-3.5 opacity-50" />
               ) : (
-                <Volume2 className="w-3.5 h-3.5 text-vermilion" />
+                <Volume2 className="w-3.5 h-3.5 text-vermilion animate-pulse" />
               )}
             </button>
           </nav>
@@ -121,7 +119,7 @@ export default function Navbar({ onOpenInquiry }) {
 
       {/* Fullscreen Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-[61px] z-[980] bg-ink text-cream flex flex-col justify-between p-6 sm:p-10 overflow-y-auto lg:hidden">
+        <div className="fixed inset-0 top-[65px] z-[980] bg-ink text-cream flex flex-col justify-between p-6 sm:p-10 overflow-y-auto lg:hidden">
           <div className="space-y-6 pt-4">
             <div className="font-space text-xs text-cream/40 tracking-widest uppercase pb-2 border-b border-cream/20">
               NAVIGATION // 案内

@@ -106,18 +106,20 @@ export default function Footer({ onOpenInquiry }) {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border-2 border-vermilion flex items-center justify-center">
-                <span className="font-serif text-lg font-black text-vermilion">朱</span>
-              </div>
-              <span className="font-anton text-2xl tracking-wider uppercase text-cream">
-                AKARI STUDIOS
-              </span>
+            <Link to="/" onClick={() => sound.click()} className="inline-block">
+              <img
+                src="/logo1.png"
+                alt="AKARI STUDIOS"
+                className="h-12 w-auto object-contain brightness-0 invert"
+              />
+            </Link>
+            <div className="font-space text-xs font-bold text-vermilion uppercase tracking-widest">
+              TURNING VISION INTO DIGITAL REALITY.
             </div>
             <p className="font-sans text-xs md:text-sm text-cream/70 max-w-sm leading-relaxed">
               Independent creative, technology and digital growth agency. Expressive Brutalism × Editorial Art Direction × Motion.
             </p>
-            <div className="pt-2 font-mono text-xs text-cream/50">
+            <div className="pt-1 font-mono text-xs text-cream/50">
               COORDINATES: {AGENCY_INFO.coordinates}
             </div>
           </div>

@@ -1,70 +1,70 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import BrandStatement from '../components/BrandStatement';
-import ServicesIntro from '../components/ServicesIntro';
-import ServiceDeepDive from '../components/ServiceDeepDive';
-import IndustriesSection from '../components/IndustriesSection';
-import ProcessSection from '../components/ProcessSection';
-import AboutSection from '../components/AboutSection';
-import ContactCtaSection from '../components/ContactCtaSection';
+import ServicesSection from '../components/ServicesSection';
+import ConnectedEcosystem from '../components/ConnectedEcosystem';
+import WhoWeWorkWith from '../components/WhoWeWorkWith';
+import OurApproach from '../components/OurApproach';
+import AboutAkari from '../components/AboutAkari';
+import ContactSection from '../components/ContactSection';
 import { SectionTransitionDivider } from '../components/BrutalistGraphics';
 
-export default function Home({ onOpenInquiry, onSelectCaseStudy }) {
+export default function Home({ onOpenInquiry }) {
   return (
     <div className="w-full overflow-hidden selection:bg-vermilion selection:text-cream">
-      {/* SECTION 01 — HERO (Full Vermilion / Cream toggle, Black typography, Japanese Pagoda & Brutalist Concrete Collage) */}
+      {/* SECTION 01 — HERO (Akari vermilion background, Anton headline, supporting copy, primary CTA, secondary CTA, layered collage) */}
       <Hero onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
-        code="SEC. 02 // MANIFESTO & BRAND DOCTRINE"
-        kanji="信念"
+        code="SEC. 02 // BRAND STATEMENT & PHILOSOPHY"
+        kanji="哲学"
       />
 
-      {/* SECTION 02 — BRAND STATEMENT (Ink-black background, cream typography, vermilion accents) */}
+      {/* SECTION 02 — BRAND STATEMENT (Ink black background, Good Ideas Deserve Bold Execution, moving marquee) */}
       <BrandStatement />
 
       <SectionTransitionDivider
-        code="SEC. 03 // DIGITAL ARSENAL INTRODUCTION"
-        kanji="技法"
+        code="SEC. 03 // FOUR CORE DIVISIONS"
+        kanji="業務"
       />
 
-      {/* SECTION 03 — SERVICES INTRODUCTION (Warm cream background, black typography, vermilion numbering) */}
-      <ServicesIntro onOpenInquiry={onOpenInquiry} />
+      {/* SECTION 03 — OUR SERVICES (Warm cream background, What We Do, four core divisions with original visual compositions) */}
+      <ServicesSection onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
-        code="SEC. 04 // 4 CORE CAPABILITIES DEEP DIVE"
-        kanji="機能"
+        code="SEC. 04 // CONNECTED DIGITAL APPROACH"
+        kanji="連係"
       />
 
-      {/* SECTION 04 — SERVICE DEEP DIVE (Alternating visual treatments: Vermilion/Black, Ink/Cream, Cream/Vermilion, Gold/Charcoal) */}
-      <ServiceDeepDive onOpenInquiry={onOpenInquiry} />
+      {/* SECTION 04 — SERVICE CONNECTION (One connected ecosystem, four interconnected divisions) */}
+      <ConnectedEcosystem />
 
       <SectionTransitionDivider
-        code="SEC. 05 // HIGH-STAKES INDUSTRY SPECIALIZATION"
-        kanji="産業"
+        code="SEC. 05 // WHO WE WORK WITH"
+        kanji="対象"
       />
 
-      {/* SECTION 05 — INDUSTRIES (Contrasting cream and vermilion blocks with photographic compositions and growth simulator) */}
-      <IndustriesSection onOpenInquiry={onOpenInquiry} />
+      {/* SECTION 05 — WHO WE WORK WITH (Built around real businesses: Restaurants, Real Estate, Emerging Brands) */}
+      <WhoWeWorkWith onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
-        code="SEC. 06 // SPRINT METHODOLOGY & PROCESS"
-        kanji="手法"
+        code="SEC. 06 // PROCESS & SPRINT RHYTHM"
+        kanji="工程"
       />
 
-      {/* SECTION 06 — PROCESS (Ink-black background with cream typography and animated numbered stages) */}
-      <ProcessSection />
+      {/* SECTION 06 — OUR APPROACH (Ink black background, From Idea To Execution, 5-step process) */}
+      <OurApproach />
 
       <SectionTransitionDivider
-        code="SEC. 07 // STUDIO HERITAGE & QUALITY BENCHMARKS"
+        code="SEC. 07 // STUDIO IDENTITY & PURPOSE"
         kanji="本質"
       />
 
-      {/* SECTION 07 — ABOUT AKARI (Warm cream background with expressive editorial typography & business card heritage) */}
-      <AboutSection onOpenInquiry={onOpenInquiry} />
+      {/* SECTION 07 — ABOUT AKARI (Warm cream background, We Think Differently We Build With Purpose, official logo1.png) */}
+      <AboutAkari />
 
-      {/* SECTION 08 — CONTACT (Full vermilion background with oversized cream and black typography) */}
-      <ContactCtaSection onOpenInquiry={onOpenInquiry} />
+      {/* SECTION 08 — CONTACT (Akari vermilion background, Let's Make Something Matter, verified contact details) */}
+      <ContactSection onOpenInquiry={onOpenInquiry} />
     </div>
   );
 }
