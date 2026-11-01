@@ -106,6 +106,17 @@ export default function OurApproach() {
           </div>
         </div>
 
+        {/* Animated Connected Process Line */}
+        <div className="relative mb-6 hidden md:block">
+          <svg className="w-full h-6" viewBox="0 0 1000 24" fill="none">
+            <path d="M 40 12 L 960 12" stroke="#F4EBDD" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.25" />
+            <path d="M 40 12 L 960 12" stroke="#C83E17" strokeWidth="2" className="animate-dash-flow" />
+            {[100, 300, 500, 700, 900].map((cx, i) => (
+              <circle key={i} cx={cx} cy="12" r="4" fill="#C83E17" stroke="#F4EBDD" strokeWidth="1.5" />
+            ))}
+          </svg>
+        </div>
+
         {/* 5-Step Experimental Brutalist Flow (Horizontal Cards on Desktop) */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {steps.map((st, idx) => (

@@ -270,8 +270,8 @@ export default function Hero({ onOpenInquiry }) {
               <DotMatrix cols={6} rows={4} dotColor="bg-cream/40" />
             </div>
 
-            {/* Main Visual Graphic Frame */}
-            <div className="relative border-2 sm:border-4 border-ink bg-ink overflow-hidden shadow-[12px_12px_0px_#211B18]">
+            {/* Main Visual Graphic Frame with continuous float */}
+            <div className="relative border-2 sm:border-4 border-ink bg-ink overflow-hidden shadow-[12px_12px_0px_#211B18] animate-float-slow">
               {/* Composite Graphic Image */}
               <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden group">
                 <img
@@ -291,9 +291,12 @@ export default function Hero({ onOpenInquiry }) {
                 <div className="absolute inset-0 bg-ink/10 mix-blend-multiply pointer-events-none" />
               </div>
 
-              {/* Sub-label border bar */}
+              {/* Sub-label border bar with kinetic spin */}
               <div className="px-4 py-2 bg-ink text-cream border-t-2 border-ink flex items-center justify-between font-space text-[10px] sm:text-xs tracking-wider uppercase">
-                <span className="font-bold">CREATIVE × TECHNOLOGY × GROWTH</span>
+                <div className="flex items-center gap-2">
+                  <span className="animate-spin-slow inline-block text-vermilion">✦</span>
+                  <span className="font-bold">CREATIVE × TECHNOLOGY × GROWTH</span>
+                </div>
                 <span className="text-vermilion font-mono font-bold">[AKARI STUDIOS]</span>
               </div>
             </div>

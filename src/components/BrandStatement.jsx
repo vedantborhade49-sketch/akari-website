@@ -80,12 +80,14 @@ export default function BrandStatement() {
       {/* Background Halftone & Texture */}
       <div className="absolute inset-0 bg-halftone opacity-10 pointer-events-none" />
 
-      {/* Animated Scroll-Reactive Graphic Element (Enso / Geometric Circle) */}
+      {/* Animated Continuous & Scroll-Reactive Graphic Element (Enso / Geometric Circle) */}
       <div
         ref={graphicCircleRef}
-        className="absolute -right-24 -top-24 w-96 h-96 md:w-[540px] md:h-[540px] rounded-full border-4 border-vermilion/30 border-dashed pointer-events-none select-none opacity-30 flex items-center justify-center"
+        className="absolute -right-24 -top-24 w-96 h-96 md:w-[540px] md:h-[540px] rounded-full border-4 border-vermilion/30 border-dashed pointer-events-none select-none opacity-35 flex items-center justify-center animate-spin-slow"
       >
-        <div className="w-4/5 h-4/5 rounded-full border-2 border-gold/30" />
+        <div className="w-4/5 h-4/5 rounded-full border-2 border-gold/40 flex items-center justify-center">
+          <div className="w-1/2 h-1/2 rounded-full border border-vermilion/20" />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-14 relative z-10">
