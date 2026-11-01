@@ -19,6 +19,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Signature Katana Cursor: Hide default browser arrow on desktop so katana blade replaces it */
+  @media (hover: hover) and (pointer: fine) {
+    html, body, a, button, [role="button"] {
+      cursor: none !important;
+    }
+  }
+
   /* Lenis recommended css */
   html.lenis, html.lenis body {
     height: auto;
