@@ -316,6 +316,8 @@ export default function ServicesSection({ onOpenInquiry }) {
       title: 'PERFORMANCE MARKETING',
       headline: 'MAKE EVERY CAMPAIGN COUNT.',
       desc: 'We help businesses reach the right audiences through paid advertising strategies focused on visibility, enquiries and measurable campaign performance.',
+      bgImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1400&auto=format&fit=crop',
+      bgBlend: 'mix-blend-luminosity opacity-15',
       subServices: [
         'Meta Ads',
         'Google Ads',
@@ -341,6 +343,8 @@ export default function ServicesSection({ onOpenInquiry }) {
       title: 'TECHNOLOGY SOLUTIONS',
       headline: 'BUILD BEYOND THE ORDINARY.',
       desc: 'We create digital experiences and technology solutions that establish your online presence and support the way your business operates.',
+      bgImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1400&auto=format&fit=crop',
+      bgBlend: 'mix-blend-screen opacity-20',
       subServices: [
         'Website Development',
         'Landing Pages',
@@ -366,6 +370,8 @@ export default function ServicesSection({ onOpenInquiry }) {
       title: 'SOCIAL MEDIA MARKETING',
       headline: 'BE SEEN. BE REMEMBERED.',
       desc: 'We help businesses build a consistent social media presence through creative content, strategic planning and ongoing account management.',
+      bgImage: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1400&auto=format&fit=crop',
+      bgBlend: 'mix-blend-multiply opacity-15',
       subServices: [
         'Social Media Management',
         'Content Strategy',
@@ -391,6 +397,8 @@ export default function ServicesSection({ onOpenInquiry }) {
       title: 'SEO & LOCAL VISIBILITY',
       headline: 'GET FOUND WHERE IT MATTERS.',
       desc: 'We improve how businesses appear across search engines and local discovery platforms through SEO and business profile management.',
+      bgImage: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1400&auto=format&fit=crop',
+      bgBlend: 'mix-blend-overlay opacity-20',
       subServices: [
         'Search Engine Optimization',
         'Google Business Profile Management',
@@ -443,8 +451,22 @@ export default function ServicesSection({ onOpenInquiry }) {
             <div
               key={srv.id}
               id={srv.id}
-              className={`p-8 md:p-14 border-4 shadow-2xl relative transition-all duration-300 ${srv.palette.container}`}
+              className={`p-8 md:p-14 border-4 shadow-2xl relative transition-all duration-500 overflow-hidden group ${srv.palette.container}`}
             >
+              {/* Blurred Atmospheric Photographic Background Layer */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <img
+                  src={srv.bgImage}
+                  alt=""
+                  loading="lazy"
+                  className={`w-full h-full object-cover filter blur-[26px] md:blur-[34px] scale-105 group-hover:scale-115 transition-transform duration-1000 ease-out ${srv.bgBlend}`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-current/10 via-transparent to-current/20 pointer-events-none" />
+              </div>
+
+              {/* Katana Blade Corner Slash Accent */}
+              <div className="absolute -top-14 -right-14 w-36 h-36 border-b-2 border-l-2 border-current/30 transform -rotate-45 pointer-events-none opacity-40 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700" />
+
               <Crosshairs className="absolute inset-0" color={srv.palette.container.includes('border-ink') ? 'border-ink' : 'border-cream/40'} />
 
               {/* Watermark Numeral */}

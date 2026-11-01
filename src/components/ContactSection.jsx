@@ -11,12 +11,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection({ onOpenInquiry }) {
   const headlineRef = useRef(null);
+  const slashRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
+      // Katana slash flash cut across headline on scroll entrance
+      if (slashRef.current) {
+        gsap.fromTo(
+          slashRef.current,
+          { scaleX: 0, opacity: 0, transformOrigin: 'left center' },
+          {
+            scaleX: 1.2,
+            opacity: 1,
+            duration: 0.38,
+            ease: 'expo.inOut',
+            scrollTrigger: {
+              trigger: headlineRef.current,
+              start: 'top 85%',
+            },
+            onComplete: () => {
+              gsap.to(slashRef.current, { opacity: 0, duration: 0.5, ease: 'power2.out' });
+            },
+          }
+        );
+      }
+
       gsap.fromTo(
         '.contact-line',
         { y: '110%', opacity: 0 },
@@ -42,6 +64,24 @@ export default function ContactSection({ onOpenInquiry }) {
       id="contact-section"
       className="relative py-24 md:py-36 px-6 lg:px-14 bg-vermilion text-cream border-b-4 border-ink overflow-hidden selection:bg-ink selection:text-cream"
     >
+      {/* Blurred Atmospheric Background Layer (Ginza Night Skyline & Architecture) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1600&auto=format&fit=crop"
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover filter blur-[36px] scale-110 opacity-15 mix-blend-multiply"
+        />
+        <div className="absolute inset-0 bg-vermilion/30 mix-blend-multiply pointer-events-none" />
+      </div>
+
+      {/* Floating Graphic Marks */}
+      <div className="absolute top-16 right-16 pointer-events-none z-10 hidden sm:block animate-float-slow opacity-50">
+        <div className="w-12 h-12 rounded-full border-2 border-cream/40 flex items-center justify-center font-serif text-cream text-lg font-black">
+          朱
+        </div>
+      </div>
+
       {/* Background Japanese Watermark */}
       <div className="absolute right-4 -bottom-10 font-serif text-[200px] sm:text-[320px] md:text-[420px] text-ink/10 select-none pointer-events-none leading-none">
         朱
@@ -61,7 +101,15 @@ export default function ContactSection({ onOpenInquiry }) {
         </div>
 
         {/* Massive Headline (Black & Cream Typography) */}
-        <div ref={headlineRef} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-16 select-none">
+        <div ref={headlineRef} className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-16 select-none">
+          {/* Katana Entrance Slash Line */}
+          <div
+            ref={slashRef}
+            className="absolute -top-4 left-0 w-full h-1 pointer-events-none z-20 overflow-hidden"
+          >
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-cream to-transparent shadow-[0_0_12px_#ffffff]" />
+          </div>
+
           <div className="lg:col-span-8 space-y-1">
             <div className="overflow-hidden">
               <h2 className="contact-line headline-hero text-ink uppercase leading-[0.84] tracking-tighter">

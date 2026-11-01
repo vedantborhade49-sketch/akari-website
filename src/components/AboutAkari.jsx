@@ -6,6 +6,17 @@ import { Sparkles, Compass, ShieldCheck } from 'lucide-react';
 export default function AboutAkari() {
   return (
     <section className="relative py-24 md:py-36 px-6 lg:px-14 bg-cream text-ink bg-grain border-b-2 border-ink overflow-hidden selection:bg-vermilion selection:text-cream">
+      {/* Blurred Atmospheric Background Layer */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1600&auto=format&fit=crop"
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover filter blur-[34px] scale-110 opacity-10 mix-blend-multiply"
+        />
+        <div className="absolute inset-0 bg-cream/60 mix-blend-multiply pointer-events-none" />
+      </div>
+
       {/* Background Halftone & Seigaiha Waves */}
       <div className="absolute inset-0 bg-halftone opacity-25 pointer-events-none" />
       <div className="absolute right-0 bottom-0 w-48 h-32 opacity-30 pointer-events-none hidden sm:block">

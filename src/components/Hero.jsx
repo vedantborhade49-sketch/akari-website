@@ -15,6 +15,7 @@ export default function Hero({ onOpenInquiry }) {
   const copyBlockRef = useRef(null);
   const ctaGroupRef = useRef(null);
   const brushRef = useRef(null);
+  const slashRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -48,6 +49,20 @@ export default function Hero({ onOpenInquiry }) {
         { scale: 1, opacity: 1, rotate: -2, duration: 0.9, ease: 'back.out(1.8)' },
         0.3
       );
+
+      // Katana slash razor cut across visual artwork
+      if (slashRef.current) {
+        tl.fromTo(
+          slashRef.current,
+          { scaleX: 0, opacity: 0, transformOrigin: 'top left' },
+          { scaleX: 1.2, opacity: 1, duration: 0.35, ease: 'expo.inOut' },
+          0.35
+        ).to(
+          slashRef.current,
+          { opacity: 0, duration: 0.45, ease: 'power2.out' },
+          0.65
+        );
+      }
 
       // Brush stroke draw
       tl.fromTo(
@@ -136,6 +151,27 @@ export default function Hero({ onOpenInquiry }) {
     >
       {/* Background Halftone & Texture */}
       <div className="absolute inset-0 bg-halftone opacity-25 pointer-events-none" />
+
+      {/* Blurred Atmospheric Background Layer (Low visibility, Japanese architectural depth) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=1600&auto=format&fit=crop"
+          alt=""
+          loading="eager"
+          className="w-full h-full object-cover filter blur-[34px] scale-110 opacity-15 mix-blend-multiply"
+        />
+        <div className="absolute inset-0 bg-vermilion/30 mix-blend-multiply pointer-events-none" />
+      </div>
+
+      {/* Floating Graphic Accents (Japanese brush seal & crosshair) */}
+      <div className="absolute top-28 right-12 md:right-32 pointer-events-none z-10 hidden sm:block animate-float-slow opacity-60">
+        <div className="w-8 h-8 rounded-full border border-cream/50 flex items-center justify-center font-serif text-cream text-xs font-bold">
+          朱
+        </div>
+      </div>
+      <div className="absolute bottom-28 left-1/3 pointer-events-none z-10 hidden lg:block animate-float-slow opacity-40" style={{ animationDelay: '2.5s' }}>
+        <div className="w-4 h-4 border-t-2 border-l-2 border-cream/70" />
+      </div>
 
       {/* LEFT VERTICAL ANNOTATION: ア カ リ ス タ ジ オ • */}
       <VerticalJapaneseGuide
@@ -279,6 +315,15 @@ export default function Hero({ onOpenInquiry }) {
                   alt="Akari Studios Japanese Brutalist Architecture and Pagoda Collage"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+
+                {/* Katana Slash Diagonal Cut Flash on Entrance */}
+                <div
+                  ref={slashRef}
+                  className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center overflow-hidden"
+                >
+                  <div className="w-[180%] h-1 bg-gradient-to-r from-transparent via-cream to-transparent transform -rotate-45 shadow-[0_0_12px_#ffffff]" />
+                  <div className="absolute w-[180%] h-3 bg-gradient-to-r from-transparent via-vermilion to-transparent transform -rotate-45 opacity-80 blur-[2px]" />
+                </div>
 
                 {/* Overlaid Slanted Number 01 Stencil */}
                 <div className="absolute bottom-2 right-3 sm:bottom-4 sm:right-6 select-none pointer-events-none">

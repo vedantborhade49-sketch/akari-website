@@ -102,6 +102,9 @@ export default function WhoWeWorkWith({ onOpenInquiry }) {
                         alt={sec.title}
                         className="w-full h-80 sm:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
                       />
+                      {/* Katana Corner Slash Sheen */}
+                      <div className="absolute -top-10 -right-10 w-24 h-24 border-b-2 border-l-2 border-white/50 transform -rotate-45 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+
                       <div className="absolute top-3 left-3 bg-ink text-cream font-space text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
                         SECTOR 0{sec.num} // {sec.kanji}
                       </div>
