@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
+import KatanaCursor from './components/KatanaCursor';
 import Preloader from './components/Preloader';
 import InquiryModal from './components/InquiryModal';
 import CaseStudyDrawer from './components/CaseStudyDrawer';
@@ -45,8 +45,8 @@ export default function App() {
       {/* Scroll restoration */}
       <ScrollToTop />
 
-      {/* Custom Brutalist Cursor for Desktop */}
-      <CustomCursor />
+      {/* Signature White Katana Slash Trail Cursor */}
+      <KatanaCursor />
 
       {/* Initial Editorial Preloader */}
       <Preloader />
