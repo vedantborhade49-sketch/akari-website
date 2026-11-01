@@ -16,6 +16,7 @@ export default function Home({ onOpenInquiry }) {
       <Hero onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
+        type="hero-to-statement"
         code="SEC. 02 // BRAND STATEMENT & PHILOSOPHY"
         kanji="哲学"
       />
@@ -24,7 +25,9 @@ export default function Home({ onOpenInquiry }) {
       <BrandStatement />
 
       <SectionTransitionDivider
+        type="statement-to-services"
         code="SEC. 03 // FOUR CORE DIVISIONS"
+        subtitle="CAPABILITIES EXPANDED"
         kanji="業務"
       />
 
@@ -32,6 +35,7 @@ export default function Home({ onOpenInquiry }) {
       <ServicesSection onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
+        type="services-to-ecosystem"
         code="SEC. 04 // CONNECTED DIGITAL APPROACH"
         kanji="連係"
       />
@@ -40,7 +44,9 @@ export default function Home({ onOpenInquiry }) {
       <ConnectedEcosystem />
 
       <SectionTransitionDivider
+        type="statement-to-services"
         code="SEC. 05 // WHO WE WORK WITH"
+        subtitle="AUTHENTIC SECTOR FOCUS"
         kanji="対象"
       />
 
@@ -48,6 +54,7 @@ export default function Home({ onOpenInquiry }) {
       <WhoWeWorkWith onOpenInquiry={onOpenInquiry} />
 
       <SectionTransitionDivider
+        type="sectors-to-process"
         code="SEC. 06 // PROCESS & SPRINT RHYTHM"
         kanji="工程"
       />
@@ -56,6 +63,7 @@ export default function Home({ onOpenInquiry }) {
       <OurApproach />
 
       <SectionTransitionDivider
+        type="process-to-about"
         code="SEC. 07 // STUDIO IDENTITY & PURPOSE"
         kanji="本質"
       />

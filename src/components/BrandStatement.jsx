@@ -29,6 +29,23 @@ export default function BrandStatement() {
         },
       });
 
+      // Word/Line Stagger Reveal on Scroll
+      gsap.fromTo(
+        '.stmt-reveal',
+        { y: '105%', opacity: 0 },
+        {
+          y: '0%',
+          opacity: 1,
+          stagger: 0.16,
+          duration: 1.0,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headlineRef.current,
+            start: 'top 80%',
+          },
+        }
+      );
+
       // Subtle parallax on the headline
       gsap.fromTo(
         headlineRef.current,
@@ -89,16 +106,22 @@ export default function BrandStatement() {
         {/* MAIN TYPOGRAPHIC EXPERIENCE: "GOOD IDEAS DESERVE BOLD EXECUTION." */}
         <div ref={headlineRef} className="my-8 select-none">
           <div className="space-y-2">
-            <div className="font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-cream uppercase tracking-tight">
-              GOOD IDEAS
+            <div className="overflow-hidden">
+              <div className="stmt-reveal font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-cream uppercase tracking-tight">
+                GOOD IDEAS
+              </div>
             </div>
-            <div className="font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-cream uppercase tracking-tight pl-0 sm:pl-12 lg:pl-20">
-              DESERVE
+            <div className="overflow-hidden pl-0 sm:pl-12 lg:pl-20">
+              <div className="stmt-reveal font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-cream uppercase tracking-tight">
+                DESERVE
+              </div>
             </div>
-            <div className="font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-vermilion uppercase tracking-tight flex items-baseline gap-4 sm:gap-8 flex-wrap">
-              <span>BOLD EXECUTION.</span>
-              <div className="inline-block translate-y-[-0.2em] sm:translate-y-[-0.3em]">
-                <InkanStamp size="md" />
+            <div className="overflow-hidden">
+              <div className="stmt-reveal font-anton text-[clamp(3.8rem,11.5vw,10.5rem)] leading-[0.84] text-vermilion uppercase tracking-tight flex items-baseline gap-4 sm:gap-8 flex-wrap">
+                <span>BOLD EXECUTION.</span>
+                <div className="inline-block translate-y-[-0.2em] sm:translate-y-[-0.3em]">
+                  <InkanStamp size="md" />
+                </div>
               </div>
             </div>
           </div>

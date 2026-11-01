@@ -70,6 +70,29 @@ export default function ConnectedEcosystem() {
         <div className="p-8 md:p-14 border-4 border-ink bg-cream shadow-2xl relative">
           <Crosshairs className="absolute inset-0" color="border-ink" />
 
+          {/* Desktop Interconnecting Bus Line */}
+          <div className="hidden lg:flex items-center justify-between px-6 py-2.5 mb-8 bg-ink text-cream border-2 border-ink font-space text-[10px] uppercase tracking-widest shadow-md">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-vermilion animate-ping" />
+              <span className="font-bold text-vermilion">01 ACQUISITION</span>
+            </div>
+            <span className="text-cream/40 font-mono">── [FLOW] ──➔</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cream animate-pulse" />
+              <span className="font-bold text-cream">02 INFRASTRUCTURE</span>
+            </div>
+            <span className="text-cream/40 font-mono">── [FLOW] ──➔</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-vermilion animate-pulse" />
+              <span className="font-bold text-vermilion">03 BRAND RETENTION</span>
+            </div>
+            <span className="text-cream/40 font-mono">── [FLOW] ──➔</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+              <span className="font-bold text-gold">04 ORGANIC DISCOVERY</span>
+            </div>
+          </div>
+
           {/* Connected Grid with Center Hub */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             {nodes.map((node, idx) => {

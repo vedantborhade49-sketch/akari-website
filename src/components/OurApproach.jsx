@@ -9,6 +9,31 @@ gsap.registerPlugin(ScrollTrigger);
 export default function OurApproach() {
   const containerRef = useRef(null);
 
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.approach-card',
+        { y: 45, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 75%',
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const steps = [
     {
       num: '01',
@@ -86,7 +111,7 @@ export default function OurApproach() {
           {steps.map((st, idx) => (
             <div
               key={st.num}
-              className="p-6 sm:p-8 border-2 border-cream/20 bg-ink-deep relative group hover:border-vermilion hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
+              className="approach-card p-6 sm:p-8 border-2 border-cream/20 bg-ink-deep relative group hover:border-vermilion hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
             >
               <Crosshairs className="absolute inset-0" color="border-cream/20" />
 

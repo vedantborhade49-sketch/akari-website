@@ -1,11 +1,42 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticButton from './MagneticButton';
 import { Crosshairs, InkanStamp } from './BrutalistGraphics';
 import { ArrowUpRight, Mail, Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 import { AGENCY_INFO } from '../data/agencyData';
 import { sound } from '../utils/audio';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ContactSection({ onOpenInquiry }) {
+  const headlineRef = useRef(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.contact-line',
+        { y: '110%', opacity: 0 },
+        {
+          y: '0%',
+          opacity: 1,
+          stagger: 0.14,
+          duration: 0.95,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headlineRef.current,
+            start: 'top 80%',
+          },
+        }
+      );
+    }, headlineRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       id="contact-section"
@@ -30,13 +61,23 @@ export default function ContactSection({ onOpenInquiry }) {
         </div>
 
         {/* Massive Headline (Black & Cream Typography) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-16">
-          <div className="lg:col-span-8">
-            <h2 className="headline-hero text-ink uppercase leading-[0.84] tracking-tighter">
-              LET'S MAKE <br />
-              <span className="text-cream">SOMETHING</span> <br />
-              MATTER.
-            </h2>
+        <div ref={headlineRef} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-16 select-none">
+          <div className="lg:col-span-8 space-y-1">
+            <div className="overflow-hidden">
+              <h2 className="contact-line headline-hero text-ink uppercase leading-[0.84] tracking-tighter">
+                LET'S MAKE
+              </h2>
+            </div>
+            <div className="overflow-hidden">
+              <h2 className="contact-line headline-hero text-cream uppercase leading-[0.84] tracking-tighter">
+                SOMETHING
+              </h2>
+            </div>
+            <div className="overflow-hidden">
+              <h2 className="contact-line headline-hero text-ink uppercase leading-[0.84] tracking-tighter">
+                MATTER.
+              </h2>
+            </div>
           </div>
 
           <div className="lg:col-span-4 lg:pl-6 space-y-6">

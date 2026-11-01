@@ -99,9 +99,39 @@ export default function Hero({ onOpenInquiry }) {
     return () => ctx.revert();
   }, []);
 
+  const handleHeroMouseMove = (e) => {
+    if (!visualRef.current) return;
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const xOffset = (clientX / innerWidth - 0.5) * 12;
+    const yOffset = (clientY / innerHeight - 0.5) * 12;
+    gsap.to(visualRef.current, {
+      x: xOffset,
+      y: yOffset,
+      rotateY: xOffset * 0.4,
+      rotateX: -yOffset * 0.4,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleHeroMouseLeave = () => {
+    if (!visualRef.current) return;
+    gsap.to(visualRef.current, {
+      x: 0,
+      y: 0,
+      rotateY: 0,
+      rotateX: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+    });
+  };
+
   return (
     <section
       ref={containerRef}
+      onMouseMove={handleHeroMouseMove}
+      onMouseLeave={handleHeroMouseLeave}
       className="relative w-full min-h-[92vh] lg:min-h-[96vh] flex flex-col justify-between pt-6 md:pt-10 pb-8 px-6 sm:px-10 lg:px-14 bg-vermilion text-ink bg-grain border-b-2 border-ink overflow-hidden select-none selection:bg-ink selection:text-cream"
     >
       {/* Background Halftone & Texture */}
@@ -182,7 +212,7 @@ export default function Hero({ onOpenInquiry }) {
               {/* Brush Stroke underline */}
               <div
                 ref={brushRef}
-                className="absolute -bottom-4 sm:-bottom-6 left-28 sm:left-44 md:left-56 w-56 sm:w-80 md:w-96 pointer-events-none"
+                className="absolute -bottom-4 sm:-bottom-6 left-8 sm:left-44 md:left-56 w-44 sm:w-80 md:w-96 pointer-events-none"
               >
                 <BrushStroke className="w-full h-auto drop-shadow-sm" color="#F4EBDD" />
               </div>

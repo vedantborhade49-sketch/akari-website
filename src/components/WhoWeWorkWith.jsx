@@ -92,7 +92,11 @@ export default function WhoWeWorkWith({ onOpenInquiry }) {
                   
                   {/* Image Column (Alternates) */}
                   <div className={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <div className="relative border-2 border-current overflow-hidden group shadow-lg">
+                    <div
+                      data-cursor="view"
+                      data-cursor-text={sec.title.split(' ')[0]}
+                      className="relative border-2 border-current overflow-hidden group shadow-lg cursor-pointer"
+                    >
                       <img
                         src={sec.image}
                         alt={sec.title}

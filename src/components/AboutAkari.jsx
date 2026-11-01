@@ -30,7 +30,11 @@ export default function AboutAkari() {
             </h2>
 
             {/* Official Logo Integration Card */}
-            <div className="p-8 border-4 border-ink bg-cream-light shadow-2xl relative max-w-md w-full shrink-0">
+            <div
+              data-cursor="view"
+              data-cursor-text="IDENTITY"
+              className="p-8 border-4 border-ink bg-cream-light shadow-2xl relative max-w-md w-full shrink-0 group hover:shadow-[12px_12px_0px_#C83E17] transition-all duration-300"
+            >
               <Crosshairs className="absolute inset-0" color="border-ink" />
               
               <div className="text-center space-y-4">

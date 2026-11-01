@@ -1,8 +1,311 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionHeader from './SectionHeader';
 import MagneticButton from './MagneticButton';
 import { Crosshairs, DotMatrix, TechnicalBadge } from './BrutalistGraphics';
-import { ArrowUpRight, Check, Sparkles, Layers, Search, Code, TrendingUp, Video } from 'lucide-react';
+import { ArrowUpRight, Check, Sparkles, Layers, Search, Code, TrendingUp, Video, Terminal, Radio, MapPin, Eye } from 'lucide-react';
+import { sound } from '../utils/audio';
+
+// Interactive Visual 01: Performance Marketing System
+function PerformanceVisual() {
+  const [activeChannel, setActiveChannel] = useState('meta');
+
+  const channels = {
+    meta: {
+      name: 'META ADS ENGINE',
+      audience: 'HIGH-INTENT RETARGETING',
+      metric: 'LEAD GENERATION OPTIMIZED',
+      pct: '88%',
+    },
+    google: {
+      name: 'GOOGLE SEARCH & INTENT',
+      audience: 'ACTIVE SEARCH DEMAND',
+      metric: 'COMMERCIAL INTENT CAPTURE',
+      pct: '94%',
+    },
+    hybrid: {
+      name: 'OMNICHANNEL SCALE',
+      audience: 'FULL FUNNEL SYNC',
+      metric: 'INTEGRATED CONVERSION',
+      pct: '96%',
+    },
+  };
+
+  const current = channels[activeChannel];
+
+  return (
+    <div
+      data-cursor="view"
+      data-cursor-text="ENGINE"
+      className="p-6 sm:p-8 border-2 border-ink bg-ink text-cream relative overflow-hidden shadow-2xl transition-all duration-300"
+    >
+      <Crosshairs className="absolute inset-0" color="border-cream/30" />
+
+      {/* Top status bar */}
+      <div className="flex items-center justify-between pb-4 border-b border-cream/20 mb-6 font-space text-[10px] sm:text-[11px] uppercase tracking-widest">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-vermilion animate-pulse" />
+          <span className="text-vermilion font-bold">SYSTEM // 01 [LIVE ATTRIBUTION]</span>
+        </div>
+        <span className="text-cream/50">[ACTIVE PROTOCOL]</span>
+      </div>
+
+      {/* Interactive Channel Selector Tabs */}
+      <div className="flex gap-2 mb-5">
+        {[
+          { id: 'meta', label: 'META ADS' },
+          { id: 'google', label: 'GOOGLE SEARCH' },
+          { id: 'hybrid', label: 'HYBRID' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => {
+              sound.click();
+              setActiveChannel(tab.id);
+            }}
+            className={`px-3 py-1.5 font-space text-[10px] uppercase font-bold tracking-wider border transition-colors ${
+              activeChannel === tab.id
+                ? 'bg-vermilion text-cream border-vermilion'
+                : 'bg-ink-deep text-cream/70 border-cream/20 hover:border-cream/40'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Abstract Campaign Visual Composition */}
+      <div className="space-y-4">
+        <div className="p-4 border border-cream/15 bg-ink-deep">
+          <div className="flex justify-between text-xs font-space text-cream/80 uppercase mb-2">
+            <span>{current.name}</span>
+            <span className="text-vermilion font-bold font-mono">{current.pct} TARGET SYNC</span>
+          </div>
+          <div className="h-2 bg-cream/10 overflow-hidden">
+            <div
+              className="h-full bg-vermilion transition-all duration-500 ease-out"
+              style={{ width: current.pct }}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 font-space text-xs">
+          <div className="p-3 border border-cream/15 bg-ink-deep">
+            <div className="text-[10px] text-cream/50 uppercase">AUDIENCE:</div>
+            <div className="font-bold text-cream mt-0.5 text-[11px] truncate">{current.audience}</div>
+          </div>
+          <div className="p-3 border border-cream/15 bg-ink-deep">
+            <div className="text-[10px] text-cream/50 uppercase">DELIVERY:</div>
+            <div className="font-bold text-vermilion mt-0.5 text-[11px] truncate">{current.metric}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Interactive Visual 02: Technology Solutions Browser & Terminal
+function TechnologyVisual() {
+  const [activeTab, setActiveTab] = useState('stack');
+
+  const tabs = {
+    stack: [
+      '> FRAMEWORK: REACT 19 + VITE 8',
+      '> STYLING: VANILLA CSS + TOKENS',
+      '> MOTION: GSAP 3 + LENIS SMOOTH',
+      '> BUNDLE: ZERO CLS • TREE-SHAKEN',
+    ],
+    runtime: [
+      '> FIRST CONTENTFUL PAINT: < 0.4s',
+      '> INTERACTIVE LATENCY: 12ms',
+      '> ACCESSIBILITY: WCAG AA COMPLIANT',
+      '> REDUCED MOTION: AUTO-DETECTED',
+    ],
+    systems: [
+      '> COMMERCE & ERP: TAILORED API',
+      '> LOCAL RESERVATION ENGINES: LIVE',
+      '> CRM AUTOMATION PIPELINE: ACTIVE',
+      '> HIGH-AVAILABILITY CLOUD HOSTING',
+    ],
+  };
+
+  return (
+    <div
+      data-cursor="view"
+      data-cursor-text="CODE"
+      className="border-2 border-cream/30 bg-cream text-ink relative overflow-hidden shadow-2xl"
+    >
+      {/* Browser Window Header Mockup */}
+      <div className="bg-cream-dark px-4 py-2 border-b-2 border-ink flex items-center justify-between font-space text-[10px] uppercase font-bold text-ink/70">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-vermilion inline-block" />
+          <span className="w-2.5 h-2.5 rounded-full bg-gold inline-block" />
+          <span className="w-2.5 h-2.5 rounded-full bg-ink/40 inline-block" />
+        </div>
+        <span className="font-mono">AKARI_SYSTEM_VIEWER.EXE</span>
+        <span className="text-vermilion font-mono">60 FPS</span>
+      </div>
+
+      {/* Interactive Tabs */}
+      <div className="flex border-b border-ink/20 bg-cream">
+        {[
+          { id: 'stack', label: 'TECH STACK' },
+          { id: 'runtime', label: 'RUNTIME' },
+          { id: 'systems', label: 'INTEGRATIONS' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => {
+              sound.click();
+              setActiveTab(tab.id);
+            }}
+            className={`px-4 py-2 font-space text-[10px] uppercase font-bold tracking-wider transition-colors border-r border-ink/20 ${
+              activeTab === tab.id
+                ? 'bg-ink text-cream'
+                : 'text-ink/70 hover:bg-cream-light'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Terminal Display */}
+      <div className="p-6 bg-ink text-cream space-y-3 font-mono text-xs">
+        <div className="text-vermilion font-bold text-[10px] tracking-wider mb-2 font-space">
+          // TERMINAL DIAGNOSTIC: {activeTab.toUpperCase()}
+        </div>
+        <div className="space-y-1.5 min-h-[96px]">
+          {tabs[activeTab].map((line, idx) => (
+            <div key={idx} className="flex items-center gap-2 text-cream/90">
+              <span className="text-vermilion select-none">$</span>
+              <span>{line}</span>
+            </div>
+          ))}
+        </div>
+        <div className="pt-3 border-t border-cream/15 flex justify-between text-[10px] font-space text-cream/50 uppercase">
+          <span>CLEAN ARCHITECTURE</span>
+          <span className="text-vermilion font-bold">STATUS: OK</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Interactive Visual 03: Social Media Marketing Film Frame
+function SocialVisual() {
+  const [activeCadence, setActiveCadence] = useState('cinema');
+
+  return (
+    <div
+      data-cursor="view"
+      data-cursor-text="CINEMA"
+      className="p-6 sm:p-8 border-2 border-ink bg-cream-light text-ink relative overflow-hidden shadow-2xl"
+    >
+      <Crosshairs className="absolute inset-0" color="border-ink" />
+
+      <div className="flex items-center justify-between pb-4 border-b border-ink/20 mb-5 font-space text-[11px] uppercase tracking-widest font-bold">
+        <span className="text-vermilion">CONTENT PROGRAMMING // 03</span>
+        <span className="text-ink/60 font-mono">[9:16 CINEMA]</span>
+      </div>
+
+      <div className="space-y-4">
+        {/* Layered Film Frame with Staggered Preview */}
+        <div className="relative border-2 border-ink overflow-hidden aspect-[16/10] group bg-ink">
+          <img
+            src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop"
+            alt="Social Cinema and Creative Direction"
+            className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-vermilion/20 mix-blend-multiply pointer-events-none" />
+
+          {/* Film Cam Meta Overlay */}
+          <div className="absolute top-2 left-2 bg-ink text-cream font-mono text-[9px] px-2 py-0.5 uppercase font-bold tracking-wider">
+            REC ● FRAME 024 // 60 FPS
+          </div>
+          <div className="absolute bottom-2 right-2 bg-ink/90 text-cream font-mono text-[9px] px-2 py-0.5 uppercase">
+            ISO 400 • 24MM • PRORES
+          </div>
+        </div>
+
+        {/* Content Cadence Status */}
+        <div className="p-3 border border-ink/20 bg-cream flex flex-wrap items-center justify-between gap-2 font-space text-xs uppercase font-bold">
+          <span>EDITORIAL ART DIRECTION</span>
+          <span className="text-vermilion font-mono">CONSISTENT CADENCE</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Interactive Visual 04: SEO & Local Visibility Search Engine Simulator
+function SeoVisual() {
+  const [activeQuery, setActiveQuery] = useState(0);
+
+  const queries = [
+    { query: 'Fine dining Omakase Ginza Tokyo', rank: '#1 LOCAL PACK', schema: 'RestaurantSchema [JSON-LD]' },
+    { query: 'Luxury real estate residential property', rank: '#1 ORGANIC SEARCH', schema: 'RealEstateAgent [JSON-LD]' },
+    { query: 'High performance technology development', rank: '#1 CATEGORY MAPS', schema: 'ProfessionalService [JSON-LD]' },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveQuery((prev) => (prev + 1) % queries.length);
+    }, 3600);
+    return () => clearInterval(timer);
+  }, [queries.length]);
+
+  const current = queries[activeQuery];
+
+  return (
+    <div
+      data-cursor="view"
+      data-cursor-text="SEARCH"
+      className="p-6 sm:p-8 border-2 border-gold/40 bg-ink text-cream relative overflow-hidden shadow-2xl"
+    >
+      <Crosshairs className="absolute inset-0" color="border-gold/30" />
+
+      <div className="flex items-center justify-between pb-4 border-b border-gold/20 mb-5 font-space text-[11px] uppercase tracking-widest font-bold">
+        <span className="text-gold">SEARCH DISCOVERY // 04</span>
+        <span className="text-cream/50">[MAP PACK DOMINANCE]</span>
+      </div>
+
+      <div className="space-y-4">
+        {/* Mock Search Bar with Animated Query */}
+        <div className="p-4 border border-gold/30 bg-ink-deep">
+          <div className="flex items-center justify-between text-xs font-space text-gold uppercase mb-2">
+            <span className="flex items-center gap-1.5">
+              <Search className="w-3.5 h-3.5 text-gold" />
+              <span>SEARCH INTENT ENGINE</span>
+            </span>
+            <span className="font-mono text-[10px] text-cream/40">[DISCOVERY PROTOCOL]</span>
+          </div>
+
+          {/* Search Input Box */}
+          <div className="p-3 border border-cream/20 bg-ink flex items-center justify-between">
+            <div className="font-mono text-xs sm:text-sm text-cream font-bold truncate pr-2">
+              "{current.query}"
+            </div>
+            <span className="w-2 h-4 bg-vermilion inline-block animate-pulse shrink-0" />
+          </div>
+        </div>
+
+        {/* Visibility Metrics */}
+        <div className="grid grid-cols-2 gap-3 font-space text-xs">
+          <div className="p-3 border border-gold/20 bg-ink-deep">
+            <div className="text-[10px] text-cream/50 uppercase">TARGET RANK:</div>
+            <div className="font-bold text-gold mt-0.5 text-[11px]">{current.rank}</div>
+          </div>
+          <div className="p-3 border border-gold/20 bg-ink-deep">
+            <div className="text-[10px] text-cream/50 uppercase">STRUCTURE:</div>
+            <div className="font-bold text-cream mt-0.5 text-[10px] truncate">{current.schema}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesSection({ onOpenInquiry }) {
   const services = [
@@ -29,40 +332,7 @@ export default function ServicesSection({ onOpenInquiry }) {
         numeral: 'text-ink/15',
         graphic: 'border-cream/30 bg-ink/20',
       },
-      visual: (
-        <div className="p-6 sm:p-8 border-2 border-ink bg-ink text-cream relative overflow-hidden shadow-2xl">
-          <Crosshairs className="absolute inset-0" color="border-cream/30" />
-          
-          <div className="flex items-center justify-between pb-4 border-b border-cream/20 mb-6 font-space text-[11px] uppercase tracking-widest">
-            <span className="text-vermilion font-bold">CAMPAIGN SYSTEM // 01</span>
-            <span className="text-cream/50">[ATTRIBUTION: ACTIVE]</span>
-          </div>
-
-          {/* Abstract Campaign Visual Composition */}
-          <div className="space-y-4">
-            <div className="p-4 border border-cream/15 bg-ink-deep">
-              <div className="flex justify-between text-xs font-space text-cream/70 uppercase mb-2">
-                <span>ACQUISITION FUNNEL</span>
-                <span className="text-vermilion font-bold font-mono">LIVE OPTIMIZATION</span>
-              </div>
-              <div className="h-2 bg-cream/10 overflow-hidden">
-                <div className="h-full bg-vermilion w-4/5" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 font-space text-xs">
-              <div className="p-3 border border-cream/15 bg-ink-deep">
-                <div className="text-[10px] text-cream/50 uppercase">TARGETING:</div>
-                <div className="font-bold text-cream mt-0.5">HIGH-INTENT AUDIENCE</div>
-              </div>
-              <div className="p-3 border border-cream/15 bg-ink-deep">
-                <div className="text-[10px] text-cream/50 uppercase">CHANNEL:</div>
-                <div className="font-bold text-vermilion mt-0.5">META × GOOGLE SEARCH</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      visual: <PerformanceVisual />,
     },
     {
       id: 'services-technology',
@@ -87,42 +357,7 @@ export default function ServicesSection({ onOpenInquiry }) {
         numeral: 'text-cream/10',
         graphic: 'border-cream/20 bg-ink-deep',
       },
-      visual: (
-        <div className="border-2 border-cream/30 bg-cream text-ink relative overflow-hidden shadow-2xl">
-          {/* Browser Window Header Mockup */}
-          <div className="bg-cream-dark px-4 py-2 border-b-2 border-ink flex items-center justify-between font-space text-[10px] uppercase font-bold text-ink/70">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-vermilion inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-gold inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-ink/40 inline-block" />
-            </div>
-            <span>AKARI_SYSTEM_VIEWER.EXE</span>
-            <span className="text-vermilion font-mono">60 FPS</span>
-          </div>
-
-          <div className="p-6 sm:p-8 bg-cream-light space-y-4">
-            <div className="p-4 border-2 border-ink bg-cream">
-              <div className="font-space text-xs font-bold text-vermilion uppercase mb-1">
-                // ARCHITECTURE STACK
-              </div>
-              <div className="font-anton text-2xl uppercase text-ink">
-                REACT 19 • HIGH-SPEED WEB PLATFORMS
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 font-space text-xs">
-              <div className="p-3 border border-ink/20 bg-cream">
-                <div className="text-[10px] text-ink/50 uppercase">PERFORMANCE:</div>
-                <div className="font-bold text-ink mt-0.5">INSTANT PAGELOAD</div>
-              </div>
-              <div className="p-3 border border-ink/20 bg-cream">
-                <div className="text-[10px] text-ink/50 uppercase">SYSTEMS:</div>
-                <div className="font-bold text-ink mt-0.5">CUSTOM INTEGRATIONS</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      visual: <TechnologyVisual />,
     },
     {
       id: 'services-social',
@@ -147,35 +382,7 @@ export default function ServicesSection({ onOpenInquiry }) {
         numeral: 'text-ink/10',
         graphic: 'border-ink bg-cream-light',
       },
-      visual: (
-        <div className="p-6 sm:p-8 border-2 border-ink bg-cream-light text-ink relative overflow-hidden shadow-2xl">
-          <Crosshairs className="absolute inset-0" color="border-ink" />
-
-          <div className="flex items-center justify-between pb-4 border-b border-ink/20 mb-6 font-space text-[11px] uppercase tracking-widest font-bold">
-            <span className="text-vermilion">CONTENT PROGRAMMING // 03</span>
-            <span className="text-ink/50">[9:16 CINEMA]</span>
-          </div>
-
-          <div className="space-y-4">
-            <div className="border border-ink overflow-hidden relative aspect-[16/9] group">
-              <img
-                src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop"
-                alt="Social Cinema and Creative Direction"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-              />
-              <div className="absolute inset-0 bg-vermilion/15 mix-blend-multiply" />
-              <div className="absolute top-2 left-2 bg-ink text-cream font-space text-[9px] px-2 py-0.5 uppercase font-bold">
-                FILM FRAME // REEL 03
-              </div>
-            </div>
-
-            <div className="p-3 border border-ink/20 bg-cream flex justify-between items-center font-space text-xs uppercase font-bold">
-              <span>EDITORIAL ART DIRECTION</span>
-              <span className="text-vermilion font-mono">CONSISTENT CADENCE</span>
-            </div>
-          </div>
-        </div>
-      ),
+      visual: <SocialVisual />,
     },
     {
       id: 'services-seo',
@@ -200,39 +407,7 @@ export default function ServicesSection({ onOpenInquiry }) {
         numeral: 'text-gold/10',
         graphic: 'border-gold/30 bg-ink',
       },
-      visual: (
-        <div className="p-6 sm:p-8 border-2 border-gold/40 bg-ink text-cream relative overflow-hidden shadow-2xl">
-          <Crosshairs className="absolute inset-0" color="border-gold/30" />
-
-          <div className="flex items-center justify-between pb-4 border-b border-gold/20 mb-6 font-space text-[11px] uppercase tracking-widest font-bold">
-            <span className="text-gold">SEARCH DISCOVERY // 04</span>
-            <span className="text-cream/50">[MAP PACK DOMINANCE]</span>
-          </div>
-
-          <div className="space-y-4">
-            <div className="p-4 border border-gold/20 bg-ink-deep">
-              <div className="flex items-center gap-2 font-space text-xs text-gold uppercase mb-2">
-                <Search className="w-3.5 h-3.5" />
-                <span>SEARCH INTENT QUERY</span>
-              </div>
-              <div className="font-anton text-xl uppercase text-cream">
-                "HIGH-INTENT COMMERCIAL DISCOVERY"
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 font-space text-xs">
-              <div className="p-3 border border-gold/20 bg-ink-deep">
-                <div className="text-[10px] text-cream/50 uppercase">VISIBILITY:</div>
-                <div className="font-bold text-gold mt-0.5">LOCAL TOP RANKINGS</div>
-              </div>
-              <div className="p-3 border border-gold/20 bg-ink-deep">
-                <div className="text-[10px] text-cream/50 uppercase">STRUCTURE:</div>
-                <div className="font-bold text-cream mt-0.5">TECHNICAL SCHEMA</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      visual: <SeoVisual />,
     },
   ];
 

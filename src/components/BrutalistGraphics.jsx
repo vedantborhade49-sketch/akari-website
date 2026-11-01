@@ -159,15 +159,104 @@ export function InkanStamp({ size = 'md', className = '' }) {
   );
 }
 
-// Section Transition Divider Line with Technical Coordinates
+// Section Transition Graphic Systems between alternating color backgrounds
 export function SectionTransitionDivider({
-  prevBg = 'bg-cream',
-  nextBg = 'bg-ink',
+  type = 'default',
   code = 'SEC.TRANSITION // 01',
   kanji = '転',
+  subtitle = 'SYSTEM PIPELINE ACTIVE',
 }) {
+  if (type === 'hero-to-statement') {
+    return (
+      <div className="relative w-full overflow-hidden bg-vermilion select-none z-20">
+        {/* Slanted ink wedge transition */}
+        <div className="w-full h-8 sm:h-12 bg-ink transform -skew-y-1 origin-top-left border-t-2 border-cream/30 flex items-center justify-between px-6 lg:px-14">
+          <div className="flex items-center gap-3 font-space text-[10px] sm:text-xs tracking-widest text-cream uppercase">
+            <span className="w-2 h-2 bg-vermilion inline-block animate-ping" />
+            <span className="font-bold text-vermilion font-mono">PHASE 01 ➔ 02</span>
+            <span className="text-cream/60 hidden sm:inline">// {code}</span>
+          </div>
+          <div className="flex items-center gap-4 text-cream font-space text-[10px] tracking-widest uppercase">
+            <span className="font-serif text-sm font-bold text-vermilion">{kanji}</span>
+            <span className="hidden md:inline text-cream/40">[KINETIC TRANSITION]</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'statement-to-services') {
+    return (
+      <div className="relative w-full overflow-hidden bg-ink select-none z-20">
+        <div className="w-full py-3 bg-cream text-ink border-y-2 border-ink flex items-center justify-between px-6 lg:px-14 font-space text-[10px] sm:text-xs tracking-widest uppercase shadow-md">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 bg-vermilion inline-block" />
+            <span className="font-bold text-ink">{code}</span>
+            <span className="text-ink/50 hidden sm:inline">[{subtitle}]</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-serif text-sm text-vermilion font-black">{kanji}</span>
+            <span className="font-mono text-ink/60">35.6762° N</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'services-to-ecosystem') {
+    return (
+      <div className="relative w-full py-2 bg-cream text-ink select-none border-b-2 border-ink z-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 flex items-center justify-between font-space text-[10px] tracking-widest uppercase text-ink/70">
+          <div className="flex items-center gap-4">
+            <span className="text-vermilion font-bold">CONNECTIVITY BUS //</span>
+            <span className="hidden sm:inline">01 PERFORMANCE ➔ 02 TECH ➔ 03 SOCIAL ➔ 04 SEO</span>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-vermilion font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-vermilion animate-pulse" />
+            <span>FULL ECOSYSTEM LINKED</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'sectors-to-process') {
+    return (
+      <div className="relative w-full overflow-hidden bg-cream select-none z-20">
+        <div className="w-full py-3 bg-ink text-cream border-t-4 border-vermilion flex items-center justify-between px-6 lg:px-14 font-space text-[10px] sm:text-xs tracking-widest uppercase">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 bg-vermilion animate-ping" />
+            <span className="font-bold text-cream">{code}</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-serif text-xs text-vermilion font-bold">{kanji}</span>
+            <span className="text-cream/50 font-mono hidden sm:inline">[EXECUTION SPRINT]</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'process-to-about') {
+    return (
+      <div className="relative w-full overflow-hidden bg-ink select-none z-20">
+        <div className="w-full py-3 bg-cream text-ink border-y-2 border-ink flex items-center justify-between px-6 lg:px-14 font-space text-[10px] sm:text-xs tracking-widest uppercase">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 bg-vermilion inline-block" />
+            <span className="font-bold">{code}</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-serif text-xs text-vermilion font-bold">{kanji}</span>
+            <span className="text-ink/60 font-mono">[STUDIO CULTURE & VALUES]</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Default fallback
   return (
-    <div className={`w-full py-2.5 px-6 lg:px-12 flex items-center justify-between font-space text-[10px] tracking-widest uppercase border-y border-ink/20 bg-ink text-cream/70 select-none`}>
+    <div className="w-full py-2.5 px-6 lg:px-12 flex items-center justify-between font-space text-[10px] tracking-widest uppercase border-y border-ink/20 bg-ink text-cream/70 select-none z-20">
       <div className="flex items-center gap-3">
         <span className="w-2 h-2 bg-vermilion inline-block animate-pulse" />
         <span className="font-bold text-cream">{code}</span>
